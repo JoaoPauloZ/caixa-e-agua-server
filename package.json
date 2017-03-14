@@ -1,0 +1,23 @@
+{
+  "name": "caixa-e-agua-server",
+  "version": "1.0.0",
+  "description": "Backend dos aplicativos aplicativos da Caixa e Água",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoPauloZ/caixa-e-agua-server.git"
+  },
+  "author": "João Paulo Serodio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaoPauloZ/caixa-e-agua-server/issues"
+  },
+  "homepage": "https://github.com/JoaoPauloZ/caixa-e-agua-server#readme"
+}
