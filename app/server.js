@@ -4,22 +4,11 @@ var app = express();
 // Porta do server
 var port = 3000;
 
-app.get('/api/caixa-e-agua/ranking/save/:user/:points', savePoints);
+var score = require('./score');
 
-function savePoints(req, res) {
-   const user = req.params.user;
-   const points = req.params.points;
+app.post('/api/caixa-e-agua/ranking/save', score.savePoints);
 
-   if (!user || !points) {
-      return res.status(400).send("Usuário ou dados não informados.");
-   }
-
-   console.log("usuário = " + user);
-   console.log("points = " + points);
-
-   // Do something with the data
-   return res.status(200).send("Dados salvos com sucesso");
-}
+app.get('/api/caixa-e-agua/ranking/get', score.getPoints);
 
 // Iniciando o servidor
 app.listen(port, function () {
