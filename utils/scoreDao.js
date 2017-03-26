@@ -1,11 +1,14 @@
 const fs = require('fs');
 const LOCAL_DB = "resources/"
+
+// Iniciar o mongo: mongod --dbpath=D:\data\db\
+
 var scoreDao = {
 
    getAll: function () {
-      var dados = fs.readFileSync('db_00.json', {encoding: 'utf8'});
-      dados = JSON.parse(dados);
-      return dados;
+      var users = fs.readFileSync(LOCAL_DB + 'db_00.json', {encoding: 'utf8'});
+      users = JSON.parse(users);
+      return users;
    },
 
    getScoreId: function (id) {
