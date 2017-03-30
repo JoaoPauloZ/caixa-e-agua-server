@@ -30,7 +30,15 @@ var score = {
    },
 
    getPoints: function (req, res) {
-
+      scoreDao.getAll(function(err, users) {
+         if (err) {
+            console.log("Error: " + err);
+            return res.status(400).send(err);
+         } else {
+            console.log("Data: " + users);
+            return res.status(200).send(users);
+         }
+      });
    }
 };
 

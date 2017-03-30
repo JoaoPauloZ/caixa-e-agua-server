@@ -8,7 +8,7 @@ var score = require('./score');
 
 app.post('/api/caixa-e-agua/ranking/save', score.savePoints);
 
-app.get('/api/caixa-e-agua/ranking/get', score.getPoints);
+app.get('/api/caixa-e-agua/ranking', score.getPoints);
 
 // Iniciando o servidor
 app.listen(port, function () {
