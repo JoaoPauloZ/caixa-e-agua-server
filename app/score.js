@@ -20,9 +20,24 @@ var score = {
          console.log("points = " + user.points);
 
          // Do something with the data
-         scoreDao.saveScoreUser(user);
-         console.log("Dados salvos com sucesso");
-         return res.status(200).send("Dados salvos com sucesso");
+         scoreDao.saveScoreUser(user, function (err, result) {
+				if (!err) {
+					console.log("Dados salvos com sucesso");
+					return res.status(200).json({
+						msg: "Dados salvos com sucesso!",
+						idUser: result.insertedId,
+						err: err
+					});
+				} else {
+					console.log("Erro Salvando dados");
+					console.log(err);
+         		return res.status(400).json({
+						msg: "Erro, dados não salvos.",
+						idUser: "",
+						err: err
+					});
+				}
+         });
       } else {
          console.log("Dados do usuário não informados");
          return res.status(400).send("Dados do usuário não informados");
@@ -30,8 +45,18 @@ var score = {
    },
 
    getPoints: function (req, res) {
-      scoreDao.getAll(function(data) {
-          return res.status(400).send(data);
+      scoreDao.getAll(function(err, data) {
+			if (!err) {
+         	return res.status(200).json({
+					result: data,
+					err: ""
+				});
+			} else {
+				return res.status(400).send({
+					result: [],
+					err: err
+				});
+			}
       });
    }
 };
