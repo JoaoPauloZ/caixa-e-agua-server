@@ -7,8 +7,8 @@ var scoreDao = {
   		Connection.connect(function (connection) {
 			
 			if (connection.err) {
-				return err;
-
+				Connection.disconnect();
+				callback("003", resultArray);
 			} else {
 				var db = connection.db;
 				var cursor = db.collection('users').find();
@@ -34,16 +34,14 @@ var scoreDao = {
          
    },
 
-   saveScoreUser: function (user, callback) {
+   insertScoreUser: function (user, callback) {
       var item = {
          name: user.name,
          points: user.points
       };
-      
-      // Use connect method to connect to the server
       Connection.connect(function(connection) {
 			if (connection.err) {
-				callback(err, null);
+				callback("001", null);
 			} else {
 				var db = connection.db;
 				db.collection('users').insertOne(item, function(err, result) {
@@ -52,6 +50,34 @@ var scoreDao = {
 				Connection.disconnect();
 			}
       });
+	},
+
+	updateScoreUser: function (user, callback) {
+   	Connection.connect(function(connection) {
+			if (connection.err) {
+				callback("001", null);
+			} else {
+				var db = connection.db;
+				db.collection('users').updateOne({name : user.name}, { $set: {points : user.points } }, function(err, result) {
+					callback(err, result.result);
+				});
+				Connection.disconnect();
+			}
+      });
+	}, 
+
+	deleteUser: function(name, callback) {
+		Connection.connect(function(connection) {
+			if (connection.err) {
+				callback("001", null);
+			} else {
+				var db = connection.db;
+				db.collection('users').deleteOne({name: name}, function (err, result) {
+					callback("004", result.result);
+				});
+				Connection.disconnect();
+			}
+		});
 	}
 
 };

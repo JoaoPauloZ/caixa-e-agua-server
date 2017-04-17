@@ -10,6 +10,8 @@ app.post('/api/caixa-e-agua/ranking/save', score.savePoints);
 
 app.get('/api/caixa-e-agua/ranking', score.getPoints);
 
+app.post('/api/caixa-e-agua/ranking/delete', score.deleteUser);
+
 // Iniciando o servidor
 app.listen(port, function () {
 	console.log('Server escutando na porta ' + port + '!');
